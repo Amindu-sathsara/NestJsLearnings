@@ -20,9 +20,11 @@ export class UsersService {
             name: 'Jack',
             email: 'jack@gmail.com',
             role: 'INTERN'
-        }
+        } 
     ]
 
+
+    //findAll methods is provide service for requesting  getting  for all the user data
     findAll(role?:'INTERN'|'ENGINEER'|'ADMIN'){
         if(role){
             return this.users.filter(user=>user.role===role)
