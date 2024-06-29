@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get,Param,Patch,Post,Query,ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get,Param,Patch,Post,Query,ParseIntPipe,ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { createUserDto } from './dto/create-user.dto';
-import { updateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 
 
@@ -39,13 +39,13 @@ findOne(@Param('id',ParseIntPipe) id: number){
 
 
 @Post()
-create(@Body() user:{name:string,email:string,role:'INTERN'|'ENGINEER'|'ADMIN'}){
-    return this.usersService.create(user)
+create(@Body(ValidationPipe) createUserDto:CreateUserDto){
+    return this.usersService.create(createUserDto);
 }
 
 @Patch(':id')      //patch  /users/:id
-update(@Param('id',ParseIntPipe) id:number, @Body() userUpdate:{name?:string,email?:string,role?:'INTERN'|'ENGINEER'|'ADMIN'}){
-    return this.usersService.update(id,userUpdate)
+update(@Param('id', ParseIntPipe) id: number, @Body(ValidationPipe) updateUserDto:UpdateUserDto){
+    return this.usersService.update(id, updateUserDto)
 }
 
 
