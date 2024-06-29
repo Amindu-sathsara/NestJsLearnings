@@ -3,4 +3,4 @@ import {PartialType} from "@nestjs/mapped-types";   //before this run this comma
 
 // using PartialType  instead of creating upadate-user.dto.ts seperately we can use the extends method because the nestjs also work with js class basically
 
-export class updateUserDto extends PartialType(createUserDto){}
+export class UpdateUserDto extends PartialType(createUserDto){}
