@@ -37,6 +37,8 @@ export class UsersService {
         return user;
     }
 
+
+    //creating services for post requests
     create(user:{name:string,email:string,role:'INTERN'|'ENGINEER'|'ADMIN'}){
         const userByHighestId=[...this.users].sort((a,b)=>b.id-a.id);
         const newUser={

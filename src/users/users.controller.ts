@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get,Param,Patch,Post,Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get,Param,Patch,Post,Query,ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 
@@ -14,7 +14,7 @@ export class UsersController {
     */
 
     constructor(private readonly usersService: UsersService) {}   // this one create instance of user service
-@Get()
+@Get()   //Get /users or /users?role=value
 findAll(@Query('role') role?:'INTERN'|'ENGINEER'|'ADMIN'){
     return this.usersService.findAll(role)
     
@@ -26,8 +26,8 @@ findAllInterns(){
 }
 
 @Get(':id')   //this is work as dynamic param , if any value comes here they it will get in to here...
-findOne(@Param('id') id: string){
-    return this.usersService.findOne(+id)  ///id is string to convert it into number can use unary plus by adding plus in front of Id
+findOne(@Param('id',ParseIntPipe) id: number){
+    return this.usersService.findOne(id)  ///id is string to convert it into number can use unary plus by adding plus in front of Id
 
 }
 
@@ -41,15 +41,15 @@ create(@Body() user:{name:string,email:string,role:'INTERN'|'ENGINEER'|'ADMIN'})
 }
 
 @Patch(':id')      //patch  /users/:id
-update(@Param('id') id:string, @Body() userUpdate:{name?:string,email?:string,role?:'INTERN'|'ENGINEER'|'ADMIN'}){
-    return this.usersService.update(+id,userUpdate)
+update(@Param('id',ParseIntPipe) id:number, @Body() userUpdate:{name?:string,email?:string,role?:'INTERN'|'ENGINEER'|'ADMIN'}){
+    return this.usersService.update(id,userUpdate)
 }
 
 
 
 @Delete(':id')  //Delete /user/:id
-delete(@Param('id') id:string){
-    return this.usersService.delete(+id)
+delete(@Param('id',ParseIntPipe) id:number){
+    return this.usersService.delete(id)
 }  
 
 
