@@ -1,5 +1,8 @@
 import { Body, Controller, Delete, Get,Param,Patch,Post,Query,ParseIntPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
+import { createUserDto } from './dto/create-user.dto';
+import { updateUserDto } from './dto/update-user.dto';
+
 
 
 @Controller('users') // ?users =it is therouter that handled by here...
