@@ -28,7 +28,9 @@ export class UsersService {
     // Method to get all users or filter by role
     findAll(role?: 'INTERN' | 'ENGINEER' | 'ADMIN') {
         if (role) {
-            return this.users.filter(user => user.role === role);
+            const AllrolersArray=this.users.filter(user => user.role === role);
+            if(AllrolersArray.length===0) throw new NotFoundException('User role not found');
+
         }
         return this.users;
     }
